@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Autores</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .btn { display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<h1>Gestão de Autores</h1>
+
+<a th:href="@{/autores/novo}" class="btn">Cadastrar Novo Autor</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Nacionalidade</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="a : ${autores}">
+        <td th:text="${a.nome}">Nome</td>
+        <td th:text="${a.nacionalidade}">Nacionalidade</td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(autores)}">
+        <td colspan="2">Nenhum autor cadastrado até o momento.</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a th:href="@{/}">Voltar para a Página Inicial</a>
+
+</body>
+</html>
