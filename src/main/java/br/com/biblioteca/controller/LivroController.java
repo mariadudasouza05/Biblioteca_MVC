@@ -15,7 +15,8 @@ import java.util.List;
 @RequestMapping("/livros")
 public class LivroController {
 
-    private static final List<Livro> listaLivros = new ArrayList<>();
+    private static  List<Livro> listaLivros = new ArrayList<>();
+    List livros = new ArrayList<>();
 
     @GetMapping
     public String inicio(Model model) {
@@ -32,6 +33,12 @@ public class LivroController {
     @PostMapping("/salvar")
     public String salvarLivro(@ModelAttribute Livro livro) {
         listaLivros.add(livro);
+        return "redirect:/livros";
+    }
+
+    @PostMapping("/livros")
+    public String cadastrar (@ModelAttribute Livro livro){
+        livros.add(livro);
         return "redirect:/livros";
     }
 }
