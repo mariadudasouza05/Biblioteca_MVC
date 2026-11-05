@@ -25,14 +25,18 @@
         <th>Autor</th>
         <th>ISBN</th>
         <th>Ano de Publicação</th>
+        <th>Excluir</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="l : ${livros}">
+    <tr th:each="l, status : ${livros}">
         <td th:text="${l.titulo}">Título</td>
         <td th:text="${l.autor}">Autor</td>
         <td th:text="${l.isbn}">ISBN</td>
         <td th:text="${l.anoPublicacao}">Ano</td>
+        <td>
+            <a th:href="@{/livros/excluir/{indice}(indice=${status.index})}" class="btn btn-danger">Excluir</a>
+        </td>
     </tr>
     <tr th:if="${#lists.isEmpty(livros)}">
         <td colspan="4">Nenhum livro cadastrado até o momento.</td>

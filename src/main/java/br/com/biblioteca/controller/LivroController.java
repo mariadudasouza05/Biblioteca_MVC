@@ -13,7 +13,6 @@ import java.util.List;
 public class LivroController {
 
     private static  List<Livro> listaLivros = new ArrayList<>();
-    List livros = new ArrayList<>();
 
     @GetMapping
     public String inicio(Model model) {
@@ -23,19 +22,25 @@ public class LivroController {
 
     @PostMapping("/livros")
     public String cadastrar (@ModelAttribute Livro livro){
-        livros.add(livro);
+        listaLivros.add(livro);
         return "redirect:/livros";
     }
 
     @GetMapping("/novo")
     public String exibirFormulario(Model model) {
-        model.addAttribute("livros", livros);
+        model.addAttribute("livro", new Livro());
         return "livros/form";
     }
 
     @PostMapping("/salvar")
     public String salvarLivro(@ModelAttribute Livro livro) {
         listaLivros.add(livro);
+        return "redirect:/livros";
+    }
+
+    @GetMapping ("/excluir/{indice}")
+    public String excluir (@PathVariable int indice) {
+        listaLivros.remove(indice);
         return "redirect:/livros";
     }
 }
