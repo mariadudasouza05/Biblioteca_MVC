@@ -35,10 +35,12 @@
         <td th:text="${l.isbn}">ISBN</td>
         <td th:text="${l.anoPublicacao}">Ano</td>
         <td>
-            <a th:href="@{/livros/excluir/{indice}(indice=${status.index})}" class="btn btn-danger">Excluir</a>
+            <form th:action="@{/livros/excluir/{indice}(indice=${status.index})}" th:object="${livro}" method="get" >
+                <button type="submit" class="btn btn-danger">Excluir</button>
+            </form>
         </td>
     </tr>
-    <tr th:if="${#lists.isEmpty(livros)}">
+    <tr th:if="${#lists.isEmpty(livros)}">d
         <td colspan="4">Nenhum livro cadastrado até o momento.</td>
     </tr>
     </tbody>

@@ -1,6 +1,7 @@
 package br.com.biblioteca.controller;
 
 import br.com.biblioteca.model.Livro;
+import br.com.biblioteca.repository.LivroRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,11 @@ import java.util.List;
 @RequestMapping("/livros")
 public class LivroController {
 
+    private final LivroRepository repository;
+    public LivroController(LivroRepository repository) {
+        this.repository = repository;
+    }
+
     private static  List<Livro> listaLivros = new ArrayList<>();
 
     @GetMapping
@@ -22,13 +28,14 @@ public class LivroController {
 
     @PostMapping("/livros")
     public String cadastrar (@ModelAttribute Livro livro){
-        listaLivros.add(livro);
+        repository.save(livro);
         return "redirect:/livros";
     }
 
     @GetMapping("/novo")
     public String exibirFormulario(Model model) {
-        model.addAttribute("livro", new Livro());
+        List<Livro> livros = repository.findAll();
+        model.addAttribute("livros", livros);
         return "livros/form";
     }
 
