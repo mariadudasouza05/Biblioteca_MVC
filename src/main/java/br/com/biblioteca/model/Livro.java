@@ -1,9 +1,15 @@
 package br.com.biblioteca.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 @Entity
 public class Livro {
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String titulo;
@@ -19,6 +25,10 @@ public class Livro {
         this.autor = autor;
         this.isbn = isbn;
         this.anoPublicacao = anoPublicacao;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getTitulo() {

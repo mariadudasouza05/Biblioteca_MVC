@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -9,7 +10,8 @@
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         th { background-color: #f4f4f4; }
-        .btn { display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; }
+        .btn {display: inline-block;padding: 8px 12px;background-color: #007bff;color: white;text-decoration: none;border-radius: 4px;border: none;cursor: pointer;}
+        .btn-danger {background-color: #dc3545;}
     </style>
 </head>
 <body>
@@ -23,15 +25,26 @@
     <tr>
         <th>Nome</th>
         <th>Nacionalidade</th>
+        <th>Excluir</th>
     </tr>
     </thead>
+
     <tbody>
     <tr th:each="a : ${autores}">
         <td th:text="${a.nome}">Nome</td>
         <td th:text="${a.nacionalidade}">Nacionalidade</td>
+        <td>
+            <form th:action="@{/autores/excluir/{id}(id=${a.id})}"
+                  method="post">
+                <button type="submit" class="btn btn-danger">
+                    Excluir
+                </button>
+            </form>
+        </td>
     </tr>
+
     <tr th:if="${#lists.isEmpty(autores)}">
-        <td colspan="2">Nenhum autor cadastrado até o momento.</td>
+        <td colspan="3">Nenhum autor cadastrado até o momento.</td>
     </tr>
     </tbody>
 </table>

@@ -1,6 +1,16 @@
 package br.com.biblioteca.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Autor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String nome;
     private String nacionalidade;
 
@@ -10,6 +20,14 @@ public class Autor {
     public Autor(String nome, String nacionalidade) {
         this.nome = nome;
         this.nacionalidade = nacionalidade;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {

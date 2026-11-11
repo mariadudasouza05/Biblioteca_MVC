@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Categoria</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"] { width: 300px; padding: 8px; box-sizing: border-box; }
+        button { padding: 10px 15px; background-color: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+
+<h1>Cadastrar Nova Categoria</h1>
+
+<form th:action="@{/categorias/salvar}" th:object="${categoria}" method="post">
+    <div class="form-group">
+        <label for="nome">Nome da Categoria:</label>
+        <input type="text" id="nome" th:field="*{nomeCategoria}" required />
+    </div>
+
+    <button type="submit">Salvar Categoria</button>
+</form>
+
+<br>
+<a th:href="@{/categorias}">Voltar para a Lista</a>
+
+</body>
+</html>

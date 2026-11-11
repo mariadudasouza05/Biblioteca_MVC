@@ -1,25 +1,24 @@
 package br.com.biblioteca.controller;
 
 import br.com.biblioteca.model.Autor;
+import br.com.biblioteca.repository.AutorRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/autores")
 public class AutorController {
 
-    private static final List<Autor> listaAutores = new ArrayList<>();
+    private final AutorRepository repository;
+
+    public AutorController(AutorRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping
     public String inicio(Model model) {
-        model.addAttribute("autores", listaAutores);
+        model.addAttribute("autores", repository.findAll());
         return "autores/inicio";
     }
 
@@ -31,7 +30,13 @@ public class AutorController {
 
     @PostMapping("/salvar")
     public String salvarAutor(@ModelAttribute Autor autor) {
-        listaAutores.add(autor);
+        repository.save(autor);
+        return "redirect:/autores";
+    }
+
+    @PostMapping("/excluir/{id}")
+    public String excluir(@PathVariable Long id) {
+        repository.deleteById(id);
         return "redirect:/autores";
     }
 }

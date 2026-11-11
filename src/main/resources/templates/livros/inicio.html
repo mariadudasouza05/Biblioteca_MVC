@@ -1,22 +1,60 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Livros</title>
+
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        h1 { color: #2c3e50; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background-color: #f4f4f4; }
-        .btn { display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
     </style>
 </head>
+
 <body>
 
 <h1>Gestão de Livros</h1>
 
-<a th:href="@{/livros/novo}" class="btn">Cadastrar Novo Livro</a>
+<a th:href="@{/livros/novo}" class="btn">
+    Cadastrar Novo Livro
+</a>
 
 <table>
     <thead>
@@ -28,25 +66,38 @@
         <th>Excluir</th>
     </tr>
     </thead>
+
     <tbody>
-    <tr th:each="l, status : ${livros}">
+
+    <tr th:each="l : ${livros}">
         <td th:text="${l.titulo}">Título</td>
         <td th:text="${l.autor}">Autor</td>
         <td th:text="${l.isbn}">ISBN</td>
         <td th:text="${l.anoPublicacao}">Ano</td>
+
         <td>
-            <form th:action="@{/livros/excluir/{indice}(indice=${status.index})}" th:object="${livro}" method="get" >
-                <button type="submit" class="btn btn-danger">Excluir</button>
+            <form th:action="@{/livros/excluir/{id}(id=${l.id})}"
+                  method="post">
+
+                <button type="submit" class="btn btn-danger">
+                    Excluir
+                </button>
+
             </form>
         </td>
     </tr>
-    <tr th:if="${#lists.isEmpty(livros)}">d
-        <td colspan="4">Nenhum livro cadastrado até o momento.</td>
+
+    <tr th:if="${#lists.isEmpty(livros)}">
+        <td colspan="5">
+            Nenhum livro cadastrado até o momento.
+        </td>
     </tr>
+
     </tbody>
 </table>
 
 <br>
+
 <a th:href="@{/}">Voltar para a Página Inicial</a>
 
 </body>
