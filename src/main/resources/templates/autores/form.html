@@ -14,9 +14,12 @@
 </head>
 <body>
 
-<h1>Cadastrar Novo Autor</h1>
+<h1 th:text="${autor.id == null ? 'Cadastrar Novo Autor' : 'Editar Autor'}">Autor</h1>
 
 <form th:action="@{/autores/salvar}" th:object="${autor}" method="post">
+
+    <input type="hidden" th:field="*{id}" />
+
     <div class="form-group">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" th:field="*{nome}" required />
@@ -27,7 +30,10 @@
         <input type="text" id="nacionalidade" th:field="*{nacionalidade}" required />
     </div>
 
-    <button type="submit">Salvar Autor</button>
+    <button type="submit"
+            th:text="${autor.id == null ? 'Salvar Autor' : 'Atualizar Autor'}">
+        Salvar
+    </button>
 </form>
 
 <br>

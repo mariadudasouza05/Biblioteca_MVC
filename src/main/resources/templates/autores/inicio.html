@@ -11,7 +11,8 @@
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         th { background-color: #f4f4f4; }
         .btn {display: inline-block;padding: 8px 12px;background-color: #007bff;color: white;text-decoration: none;border-radius: 4px;border: none;cursor: pointer;}
-        .btn-danger {background-color: #dc3545;}
+        .btn-danger { background-color: #dc3545; }
+        .btn-edit { background-color: #28a745; }
     </style>
 </head>
 <body>
@@ -25,6 +26,7 @@
     <tr>
         <th>Nome</th>
         <th>Nacionalidade</th>
+        <th>Editar</th>
         <th>Excluir</th>
     </tr>
     </thead>
@@ -33,6 +35,14 @@
     <tr th:each="a : ${autores}">
         <td th:text="${a.nome}">Nome</td>
         <td th:text="${a.nacionalidade}">Nacionalidade</td>
+
+        <td>
+            <a th:href="@{/autores/editar/{id}(id=${a.id})}"
+               class="btn btn-edit">
+                Editar
+            </a>
+        </td>
+
         <td>
             <form th:action="@{/autores/excluir/{id}(id=${a.id})}"
                   method="post">
@@ -44,7 +54,7 @@
     </tr>
 
     <tr th:if="${#lists.isEmpty(autores)}">
-        <td colspan="3">Nenhum autor cadastrado até o momento.</td>
+        <td colspan="4">Nenhum autor cadastrado até o momento.</td>
     </tr>
     </tbody>
 </table>

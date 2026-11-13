@@ -63,6 +63,7 @@
         <th>Autor</th>
         <th>ISBN</th>
         <th>Ano de Publicação</th>
+        <th>Editar</th>
         <th>Excluir</th>
     </tr>
     </thead>
@@ -74,6 +75,13 @@
         <td th:text="${l.autor}">Autor</td>
         <td th:text="${l.isbn}">ISBN</td>
         <td th:text="${l.anoPublicacao}">Ano</td>
+
+        <td>
+            <a th:href="@{/livros/editar/{id}(id=${l.id})}"
+               class="btn btn-edit">
+                Editar
+            </a>
+        </td>
 
         <td>
             <form th:action="@{/livros/excluir/{id}(id=${l.id})}"

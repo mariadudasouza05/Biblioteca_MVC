@@ -1,6 +1,7 @@
 package br.com.biblioteca.controller;
 
 import br.com.biblioteca.model.Autor;
+import br.com.biblioteca.model.Livro;
 import br.com.biblioteca.repository.AutorRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,5 +39,13 @@ public class AutorController {
     public String excluir(@PathVariable Long id) {
         repository.deleteById(id);
         return "redirect:/autores";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editarAutor(@PathVariable Long id, Model model) {
+        Autor autor = repository.findById(id)
+                .orElseThrow();
+        model.addAttribute("autor", autor);
+        return "autores/form";
     }
 }
